@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0b1a;
+  --panel: #14142b;
+  --line: #2a2a52;
+  --lime: #b6ff3c;
+  --violet: #8b5cf6;
+  --pink: #ff4fa3;
+  --text: #f3f2ff;
+  --muted: #9a98c4;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100%;
+}
+
+body {
+  background-image:
+    radial-gradient(900px 500px at 10% -10%, #8b5cf633, transparent 60%),
+    radial-gradient(700px 400px at 100% 0%, #b6ff3c1a, transparent 55%);
+  background-attachment: fixed;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.card {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.9rem;
+  padding: 0.75rem 1.1rem;
+  font-weight: 800;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+.btn:active { transform: translateY(1px) scale(0.99); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--lime); color: #101010; box-shadow: 0 4px 0 #6f9c1b; }
+.btn-ghost { background: transparent; border-color: var(--line); color: var(--text); }
+.input {
+  width: 100%;
+  background: #0e0e22;
+  border: 2px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  color: var(--text);
+  outline: none;
+}
+.input:focus { border-color: var(--violet); }
+.muted { color: var(--muted); }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  border-radius: 999px; padding: 0.15rem 0.6rem; font-size: 0.75rem; font-weight: 700;
+  border: 1.5px solid var(--line);
+}
+@keyframes pop { 0% { transform: scale(0.6); opacity: 0 } 70% { transform: scale(1.08) } 100% { transform: scale(1); opacity: 1 } }
+.pop { animation: pop 0.45s ease-out both; }
