@@ -13,7 +13,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ address: strin
 
   const meets: MeetRecord[] = [];
   for (const s of allSessions()) {
-    if (s.status !== "recorded" || !s.b || !s.txHash) continue;
+    if (s.status !== "recorded" || s.simulated || !s.b || !s.txHash) continue;
     const isA = s.a.address.toLowerCase() === address.toLowerCase();
     const isB = s.b.address.toLowerCase() === address.toLowerCase();
     if (!isA && !isB) continue;
@@ -27,7 +27,6 @@ export async function GET(_req: Request, ctx: { params: Promise<{ address: strin
       myAnswer: me.answer ?? "",
       theirAnswer: them.answer ?? "",
       txHash: s.txHash,
-      simulated: Boolean(s.simulated),
       recordedAt: s.recordedAt ?? 0,
     });
   }

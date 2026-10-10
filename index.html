@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#a9d4f5" />
+  <title>ShakeProof — Meet. Verify. Sign.</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="scene">
+    <header class="topbar">
+      <div class="brand-mark">✦</div>
+      <div><strong>ShakeProof</strong><span>Meet. Verify. Sign.</span></div>
+      <button class="icon-button" aria-label="Settings" id="settingsBtn">⚙</button>
+    </header>
+
+    <section class="phones" aria-label="ShakeProof app preview">
+      <article class="phone phone-home">
+        <div class="notch"></div>
+        <div class="screen home-screen">
+          <h1>ShakeProof</h1>
+          <p class="tagline">Trust, in a handshake.</p>
+          <div class="map-card">
+            <div class="path path-one"></div><div class="path path-two"></div>
+            <span class="tree tree-a">🌳</span><span class="tree tree-b">🌲</span>
+            <span class="tree tree-c">🌳</span><span class="tree tree-d">🌲</span>
+            <div class="person person-a"><span>👩🏻</span><small>Phone A</small></div>
+            <div class="person person-b"><span>🧑🏽</span><small>Phone B</small></div>
+            <div class="map-pin">⌖</div>
+          </div>
+          <div class="nav-icons">
+            <button class="nav-item active" data-tab="Passport"><span>▣</span><small>Passport</small></button>
+            <button class="nav-item" data-tab="Leaders"><span>♟</span><small>Leaders</small></button>
+            <button class="nav-item" data-tab="Profile"><span>●</span><small>Profile</small></button>
+          </div>
+          <button class="primary-button start-btn" id="startBtn"><span>🤝</span> START A HANDSHAKE</button>
+          <p class="micro-copy">Secure, nearby, and on-chain.</p>
+        </div>
+      </article>
+
+      <article class="phone phone-quest">
+        <div class="notch"></div>
+        <div class="screen quest-screen">
+          <div class="people-row">
+            <div class="person-card alice"><span class="letter">A</span><div class="avatar">👩🏻</div><b>CryptoAlice</b><small>Initiator</small></div>
+            <div class="person-card bob"><span class="letter">B</span><div class="avatar">🧑🏽</div><b>EthBob</b><small>Counterparty</small></div>
+          </div>
+          <div class="quest-title">CURRENT QUEST</div>
+          <div class="quest-box">
+            <p class="question">What's the most unusual place you've ever discussed crypto?</p>
+            <label class="sr-only" for="answerOne">Your answer</label>
+            <input id="answerOne" placeholder="Answer" maxlength="100" />
+            <label class="sr-only" for="answerTwo">Second answer</label>
+            <input id="answerTwo" placeholder="Answer" maxlength="100" />
+            <p class="hint" id="answerHint">Answer a quick question to confirm you're both present.</p>
+          </div>
+          <div class="gps-status"><span>GPS CHECK: PROXIMITY</span><b><span class="gps-dot"></span> <span id="gpsText">OK</span></b></div>
+          <button class="secondary-button" id="answerBtn">ANSWER QUEST</button>
+          <p class="micro-copy bottom-note">Both people must agree to continue.</p>
+        </div>
+      </article>
+
+      <article class="phone phone-sign">
+        <div class="notch"></div>
+        <div class="screen sign-screen">
+          <div class="qr-card" aria-label="Demo QR code"><div class="qr" id="qrCode"></div></div>
+          <div class="handshake-graphic"><span class="signal left">)))</span><span>🤝</span><span class="signal right">(((</span></div>
+          <div class="signature-row">
+            <div class="signature-card signed"><b>Alice's Signature</b><div class="signature">A. Wright</div><small>✓ Signed locally</small></div>
+            <div class="signature-card waiting"><b>Bob's Signature</b><div class="question-mark">?</div><small id="bobStatus">Awaiting...</small></div>
+          </div>
+          <button class="primary-button sign-button" id="signBtn"><span>🤝</span> SIGN HANDSHAKE</button>
+          <div class="success-card" id="successCard"><span class="medal">🏅</span><p><b id="successTitle">Ready for a real handshake?</b><br /><span id="successText">This demo simulates the flow. Connect a wallet and backend to write a real record on-chain.</span><br /><a href="https://explorer.monad.xyz/" target="_blank" rel="noreferrer">Monad Explorer ↗</a></p></div>
+        </div>
+      </article>
+    </section>
+    <footer>SHAKEPROOF <span>•</span> A trust protocol prototype <span>•</span> DEMO MODE</footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

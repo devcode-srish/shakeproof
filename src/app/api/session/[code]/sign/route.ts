@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { recordMeetOnChain, verifySignature } from "@/lib/chain";
+import { onChainReadiness, recordMeetOnChain, verifySignature } from "@/lib/chain";
 import { cleanAddress, isExpired, refreshStatus, roleOf, toView } from "@/lib/sessions";
-import { addPair, getSession, hasPair, saveSession } from "@/lib/store";
+import { getSession, saveSession } from "@/lib/store";
 
 const inFlight = new Set<string>();
 
@@ -17,6 +17,9 @@ export async function POST(req: Request, ctx: { params: Promise<{ code: string }
   const address = cleanAddress(body.address);
   const role = roleOf(s, address);
   if (role === "none" || !address) return NextResponse.json({ error: "You are not in this session" }, { status: 403 });
+
+  const readiness = await onChainReadiness();
+  if (!readiness.ready) return NextResponse.json({ error: readiness.reason }, { status: 503 });
 
   refreshStatus(s);
   if (s.status !== "ready" && s.status !== "signing") {
@@ -44,21 +47,14 @@ export async function POST(req: Request, ctx: { params: Promise<{ code: string }
   if (s.a.signature && s.b.signature && !inFlight.has(s.code)) {
     inFlight.add(s.code);
     try {
-      if (hasPair(s.a.address, s.b.address)) {
-        s.status = "failed";
-        s.failReason = "You two have already shaken hands. Each pair counts once.";
+      const result = await recordMeetOnChain(handshake, s.a.signature, s.b.signature);
+      if (result.ok) {
+        s.status = "recorded";
+        s.txHash = result.txHash;
+        s.recordedAt = Date.now();
       } else {
-        const result = await recordMeetOnChain(handshake, s.a.signature, s.b.signature);
-        if (result.ok) {
-          s.status = "recorded";
-          s.txHash = result.txHash;
-          s.simulated = result.simulated;
-          s.recordedAt = Date.now();
-          addPair(s.a.address, s.b.address);
-        } else {
-          s.status = "failed";
-          s.failReason = result.reason;
-        }
+        s.status = "failed";
+        s.failReason = result.reason;
       }
       saveSession(s);
     } finally {

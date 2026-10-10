@@ -22,16 +22,19 @@ export default function LeaderboardPage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-black">🏆 Top connectors</h1>
-      <p className="muted text-sm">Ranked by verified two-sided meets. No farming: each pair counts once.</p>
+    <div className="page-stack">
+      <section className="page-intro">
+        <p className="eyebrow">Good connections travel</p>
+        <h1 className="mt-1 text-3xl font-black">🏆 Top connectors</h1>
+        <p className="muted mt-2 text-sm">Ranked by verified two-sided meets. No farming: each pair counts once.</p>
+      </section>
       <div className="card p-0">
         {rows === null && <p className="muted p-4 text-center">Loading…</p>}
         {rows?.length === 0 && <p className="muted p-4 text-center">Nobody yet. Be the first. 🤝</p>}
         {rows?.map((r, i) => {
           const t = tierFor(r.meets);
           return (
-            <div key={r.address} className="flex items-center gap-3 border-t-2 border-[var(--line)] p-3 first:border-t-0">
+            <div key={r.address} className="leader-row flex items-center gap-3 border-t border-[var(--line)] p-4 first:border-t-0">
               <span className="w-8 text-center text-lg font-black">{i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}</span>
               <div className="flex-1">
                 <div className="font-bold">{r.name}</div>

@@ -12,21 +12,21 @@ const links = [
 export function NavBar() {
   const path = usePathname();
   return (
-    <header className="sticky top-0 z-20 border-b-2 border-[var(--line)] bg-[#0b0b1acc] backdrop-blur">
-      <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-        <Link href="/" className="text-xl font-black tracking-tight">
-          🤝 Shake<span className="text-[var(--lime)]">Proof</span>
+    <header className="nav-shell">
+      <nav className="nav-inner" aria-label="Main navigation">
+        <Link href="/" className="brand-link">
+          <span className="brand-mark" aria-hidden="true">🤝</span>
+          <span>Shake<span className="text-[var(--lime)]">Proof</span></span>
         </Link>
-        <div className="flex gap-1">
+        <div className="nav-links">
           {links.map((l) => {
             const active = l.href === "/" ? path === "/" : path.startsWith(l.href);
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`rounded-full px-3 py-1.5 text-sm font-bold ${
-                  active ? "bg-[var(--violet)] text-white" : "muted hover:text-white"
-                }`}
+                className={`nav-link${active ? " active" : ""}`}
+                aria-current={active ? "page" : undefined}
               >
                 {l.label}
               </Link>

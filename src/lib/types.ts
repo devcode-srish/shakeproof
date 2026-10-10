@@ -13,7 +13,7 @@ export type SessionStatus =
   | "quest" // both present, completing the icebreaker
   | "ready" // both answered + proximity ok: signatures can be collected
   | "signing" // at least one signature collected
-  | "recorded" // meet is on-chain (or simulated)
+  | "recorded" // meet transaction is confirmed on-chain
   | "failed";
 
 export type Session = {
@@ -27,6 +27,7 @@ export type Session = {
   b?: Participant;
   status: SessionStatus;
   txHash?: string;
+  /** Legacy flag used to hide demo-only records from older persisted stores. */
   simulated?: boolean;
   failReason?: string;
   recordedAt?: number;
@@ -47,7 +48,6 @@ export type SessionView = {
   proximity: Proximity;
   distanceMeters?: number;
   txHash?: string;
-  simulated?: boolean;
   failReason?: string;
   expired: boolean;
 };
@@ -60,7 +60,6 @@ export type MeetRecord = {
   myAnswer: string;
   theirAnswer: string;
   txHash: string;
-  simulated: boolean;
   recordedAt: number;
 };
 

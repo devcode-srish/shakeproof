@@ -8,14 +8,14 @@ export const metadata: Metadata = {
     "Mutual-consent, on-chain proof of real-world meetups on Monad. Two people, one icebreaker, two signatures.",
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0b0b1a" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#fff0f3" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <NavBar />
-        <main className="mx-auto w-full max-w-3xl px-4 pb-16 pt-6">{children}</main>
+        <main className="app-main">{children}</main>
       </body>
     </html>
   );

@@ -89,11 +89,12 @@ export function toView(s: Session, viewer?: string | null): SessionView {
   const role = roleOf(s, viewer);
   const reveal = Boolean(s.a.answer && s.b?.answer);
   const prox = evaluateProximity(s);
+  const legacyDemo = Boolean(s.simulated);
   const meP = role === "a" ? s.a : role === "b" ? s.b : undefined;
   const themP = role === "a" ? s.b : role === "b" ? s.a : undefined;
   return {
     code: s.code,
-    status: isExpired(s) && s.status !== "recorded" ? "failed" : s.status,
+    status: legacyDemo || (isExpired(s) && s.status !== "recorded") ? "failed" : s.status,
     questPrompt: s.questPrompt,
     deadline: s.deadline,
     role,
@@ -104,9 +105,12 @@ export function toView(s: Session, viewer?: string | null): SessionView {
       : undefined,
     proximity: prox.proximity,
     distanceMeters: prox.distanceMeters,
-    txHash: s.txHash,
-    simulated: s.simulated,
-    failReason: isExpired(s) && s.status !== "recorded" ? "Session expired. Start a new one." : s.failReason,
+    txHash: legacyDemo ? undefined : s.txHash,
+    failReason: legacyDemo
+      ? "This old demo handshake was not written to Monad. Start a new handshake."
+      : isExpired(s) && s.status !== "recorded"
+        ? "Session expired. Start a new one."
+        : s.failReason,
     expired: isExpired(s),
   };
 }

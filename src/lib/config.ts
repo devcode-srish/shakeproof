@@ -1,7 +1,7 @@
 export const CHAIN_ID = Number(process.env.NEXT_PUBLIC_CHAIN_ID ?? 10143);
 export const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL ?? "https://testnet-rpc.monad.xyz";
 export const EXPLORER_TX_BASE =
-  process.env.NEXT_PUBLIC_EXPLORER_TX_BASE ?? "https://testnet.monadexplorer.com/tx/";
+  process.env.NEXT_PUBLIC_EXPLORER_TX_BASE ?? "https://testnet.monadvision.com/tx/";
 export const SHAKEPROOF_ADDRESS =
   process.env.NEXT_PUBLIC_SHAKEPROOF_ADDRESS && process.env.NEXT_PUBLIC_SHAKEPROOF_ADDRESS !== ""
     ? process.env.NEXT_PUBLIC_SHAKEPROOF_ADDRESS

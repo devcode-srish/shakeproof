@@ -234,12 +234,12 @@ export default function SessionRoom() {
               </>
             ) : (
               <p className="muted text-sm">
-                Your answer: <b className="text-white">{view.me.answer}</b>
+                Your answer: <b className="text-[var(--text)]">{view.me.answer}</b>
               </p>
             )}
 
             {view.them.answer && view.me.answer && (
-              <p className="rounded-xl border-2 border-[var(--line)] p-3 text-sm">
+              <p className="answer-panel p-3 text-sm">
                 <b>{view.them.name}</b> said: {view.them.answer}
               </p>
             )}
@@ -292,25 +292,19 @@ export default function SessionRoom() {
           <p className="muted text-sm">{view.questPrompt}</p>
           {view.me?.answer && view.them?.answer && (
             <div className="grid w-full gap-2 text-left text-sm sm:grid-cols-2">
-              <p className="rounded-xl border-2 border-[var(--line)] p-3">
+              <p className="answer-panel p-3">
                 <b>{view.me.name}:</b> {view.me.answer}
               </p>
-              <p className="rounded-xl border-2 border-[var(--line)] p-3">
+              <p className="answer-panel p-3">
                 <b>{view.them.name}:</b> {view.them.answer}
               </p>
             </div>
           )}
           {view.txHash && (
             <p className="text-sm">
-              {view.simulated ? (
-                <span className="pill text-[var(--pink)]" title="No contract/relayer configured: demo mode">
-                  simulated tx {shortAddr(view.txHash)}
-                </span>
-              ) : (
-                <a className="underline" target="_blank" rel="noreferrer" href={`${EXPLORER_TX_BASE}${view.txHash}`}>
-                  View on Monad Explorer ↗
-                </a>
-              )}
+              <a className="underline" target="_blank" rel="noreferrer" href={`${EXPLORER_TX_BASE}${view.txHash}`}>
+                View transaction on MonadVision ↗
+              </a>
             </p>
           )}
           <div className="flex gap-2">

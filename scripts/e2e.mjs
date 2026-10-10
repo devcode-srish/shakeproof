@@ -74,7 +74,8 @@ ok("one signature alone does not record a meet");
 r = await call(`/api/session/${code}/sign`, { address: alice.address, signature: await alice.signTypedData(domain, types, hs) });
 assert.equal(r.data.status, "recorded");
 assert.ok(r.data.txHash?.startsWith("0x"));
-ok(`both signed -> recorded (${r.data.simulated ? "simulated" : "on-chain"} tx ${r.data.txHash.slice(0, 12)}…)`);
+assert.equal(r.data.simulated, undefined, "completed handshakes must never be marked simulated");
+ok(`both signed -> recorded on Monad (${r.data.txHash.slice(0, 12)}…)`);
 
 r = await call(`/api/passport/${alice.address}`);
 assert.equal(r.data.meets.length, 1);

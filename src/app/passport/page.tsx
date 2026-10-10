@@ -35,10 +35,13 @@ export default function PassportPage() {
   const tier = tierFor(count);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="page-stack">
       <section className="card flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-black">Meet Passport</h1>
+          <div>
+            <p className="eyebrow">Your story, verified</p>
+            <h1 className="mt-1 text-2xl font-black">Meet Passport</h1>
+          </div>
           <span className="pill text-[var(--lime)]">
             {tier.emoji} {tier.label}
           </span>
@@ -46,11 +49,11 @@ export default function PassportPage() {
         <input className="input" maxLength={24} value={name} placeholder="Trainer name" onChange={(e) => setName(e.target.value)} />
         <p className="muted font-mono text-xs break-all">{address}</p>
         <div className="grid grid-cols-2 gap-3 text-center">
-          <div className="rounded-xl border-2 border-[var(--line)] p-3">
+          <div className="stat-tile p-3">
             <div className="text-3xl font-black">{count}</div>
             <div className="muted text-xs">verified meets</div>
           </div>
-          <div className="rounded-xl border-2 border-[var(--line)] p-3">
+          <div className="stat-tile p-3">
             <div className="text-3xl font-black">{tier.next ? tier.next - count : "MAX"}</div>
             <div className="muted text-xs">{tier.next ? "more to level up" : "tier reached"}</div>
           </div>
@@ -61,7 +64,10 @@ export default function PassportPage() {
       </section>
 
       <section className="flex flex-col gap-3">
-        <h2 className="font-black">Handshake history</h2>
+        <div className="page-intro">
+          <p className="eyebrow">The people you&apos;ve met</p>
+          <h2 className="mt-1 text-xl font-black">Handshake history</h2>
+        </div>
         {data?.meets.length === 0 && (
           <div className="card muted text-center text-sm">No handshakes yet. Go meet someone! 🤝</div>
         )}
@@ -79,20 +85,19 @@ export default function PassportPage() {
               <b>{m.withName}:</b> {m.theirAnswer}
             </p>
             <p className="text-xs">
-              {m.simulated ? (
-                <span className="pill text-[var(--pink)]">simulated</span>
-              ) : (
-                <a className="underline" target="_blank" rel="noreferrer" href={`${EXPLORER_TX_BASE}${m.txHash}`}>
-                  tx ↗
-                </a>
-              )}
+              <a className="underline" target="_blank" rel="noreferrer" href={`${EXPLORER_TX_BASE}${m.txHash}`}>
+                View transaction on MonadVision ↗
+              </a>
             </p>
           </div>
         ))}
       </section>
 
       <section className="card flex flex-col gap-2">
-        <h2 className="font-black">Wallet backup</h2>
+        <div>
+          <p className="eyebrow">Keep your passport safe</p>
+          <h2 className="mt-1 font-black">Wallet backup</h2>
+        </div>
         <p className="muted text-sm">
           This is a throwaway testnet wallet stored in your browser. Export the key to keep your passport on
           another device. Never put real funds here.

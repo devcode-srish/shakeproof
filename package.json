@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "prestart": "npm run build",
+    "start": "next start -p 3001",
     "typecheck": "tsc --noEmit",
     "contract:compile": "node scripts/compile.mjs",
     "contract:test": "node scripts/test-contract.mjs",
